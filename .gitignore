@@ -27,6 +27,6 @@ replay_pid*
 *.idea/
 
 # Target
-*/target/
+target/
 
 *.iml
