@@ -18,6 +18,7 @@ public class ClubDeportivo {
 		}
 		this.nombre = nombre;
 		grupos = new Grupo[n];
+		ngrupos = 0;
 	}
 
 	private int buscar(Grupo g) {
@@ -49,8 +50,12 @@ public class ClubDeportivo {
 		}
 		int pos = buscar(g);
 		if (pos == -1) { // El grupo es nuevo
-			grupos[ngrupos] = g;
-			ngrupos++;
+			if (ngrupos < grupos.length) {
+				grupos[ngrupos] = g;
+				ngrupos++;
+			} else {
+				throw new ClubException("ERROR: no se pueden añadir más grupos al club");
+			}
 		} else { // El grupo ya existe --> modificamos las plazas
 			grupos[pos].actualizarPlazas(g.getPlazas());
 		}
