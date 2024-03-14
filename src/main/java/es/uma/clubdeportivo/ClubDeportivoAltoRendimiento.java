@@ -1,4 +1,4 @@
-package clubdeportivo;
+package es.uma.clubdeportivo;
 
 
 public class ClubDeportivoAltoRendimiento extends ClubDeportivo{
