@@ -1,6 +1,5 @@
-import clubdeportivo.ClubDeportivo;
-import clubdeportivo.ClubException;
-import clubdeportivo.Grupo;
+package es.uma;
+import es.uma.clubdeportivo.*;
 
 public class ClubDeportivoMain {
 	public static void main(String[] args) {
