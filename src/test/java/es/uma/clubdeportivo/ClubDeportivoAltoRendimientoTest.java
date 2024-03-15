@@ -3,6 +3,8 @@ package es.uma.clubdeportivo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,6 +53,89 @@ public class ClubDeportivoAltoRendimientoTest {
         assertEquals(0, club.ingresos());
     }
 
+    @Test
+    public void constructor_sinTam_argumentosValidos_generaClubConLosArgumentos(){
+        // Arrange
+        int maximo = 10;
+        double incremento = 10d;
+        String nombre = "nombre";
 
+        // Act
+        assertDoesNotThrow(() -> club = new ClubDeportivoAltoRendimiento(nombre,maximo,incremento));
+
+        // Assert
+        assertTrue(club.toString().contains(nombre)); // No puedo comprobar mucho más de forma directa
+    }
+
+    @Test
+    public void constructor_conTam_argumentosValidos_generaClubConLosArgumentos(){
+        // Arrange
+        int maximo = 10, tam = 10;
+        double incremento = 10d;
+        String nombre = "nombre";
+
+        // Act
+        assertDoesNotThrow(() -> club = new ClubDeportivoAltoRendimiento(nombre,tam,maximo,incremento));
+
+        // Assert
+        assertTrue(club.toString().contains(nombre)); // No puedo comprobar mucho más de forma directa
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,-1})
+    public void constructor_sinTam_maximoNoPositivo_lanzaExcepcion(int maximo){
+        // Arrange
+        double incremento = 10d;
+        String nombre = "nombre";
+
+        // Act
+        assertThrows(ClubException.class,() -> club = new ClubDeportivoAltoRendimiento(nombre,maximo,incremento));
+    }
+
+    @ParameterizedTest
+    @ValueSource(floats = {0,-1})
+    public void constructor_conTam_ncrementoNoPositivo_lanzaExcepcion(double incremento){
+        // Arrange
+        int maximo = 10,tam = 10;
+        String nombre = "nombre";
+
+        // Act
+        assertThrows(ClubException.class,() -> club = new ClubDeportivoAltoRendimiento(nombre,tam,maximo,incremento));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,-1})
+    public void constructor_conTam_maximoNoPositivo_lanzaExcepcion(int maximo){
+        // Arrange
+        int tam = 10;
+        double incremento = 10d;
+        String nombre = "nombre";
+
+        // Act
+        assertThrows(ClubException.class,() -> club = new ClubDeportivoAltoRendimiento(nombre,tam,maximo,incremento));
+    }
+
+    @ParameterizedTest
+    @ValueSource(floats = {0,-1})
+    public void constructor_sinTam_ncrementoNoPositivo_lanzaExcepcion(double incremento){
+        // Arrange
+        int maximo = 10;
+        String nombre = "nombre";
+
+        // Act
+        assertThrows(ClubException.class,() -> club = new ClubDeportivoAltoRendimiento(nombre,maximo,incremento));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0,-1})
+    public void constructor_tamNoPositivo_lanzaExcepcion(int tam){
+        // Arrange
+        int maximo = 10;
+        double incremento = 10d;
+        String nombre = "nombre";
+
+        // Act
+        assertThrows(ClubException.class,() -> club = new ClubDeportivoAltoRendimiento(nombre,tam,maximo,incremento));
+    }
 
 }
