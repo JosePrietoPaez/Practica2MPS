@@ -31,6 +31,20 @@ public class GrupoTest {
     }
 
     @Test
+    public void constructor_argumentosNulos_lanzaExcepcion(){
+        // Arrange
+        String codigo = "a",codigoNulo = null,
+                actividad = "b", actividadNula = null;
+        int nplazas = 100,
+                matriculados = 50;
+        double tarifa = 10d;
+
+        // Act
+        assertThrows(ClubException.class,() -> grupo = new Grupo(codigoNulo,actividad,nplazas,matriculados,tarifa));
+        assertThrows(ClubException.class,() -> grupo = new Grupo(codigo,actividadNula,nplazas,matriculados,tarifa));
+    }
+
+    @Test
     public void constructor_excesoMatriculados_lanzaExcepcion(){
         // Arrange
         String codigo = "a",
@@ -338,6 +352,26 @@ public class GrupoTest {
         // Assert
         assertFalse(sonIguales);
     }
+
+    /*
+    @Test
+    public void equals_datosNull_devuelveTrue() throws ClubException { // Para probar que se llamaba al método
+        // Assert
+        String codigo = null,
+                actividad = "b";
+        int nplazas = 100,
+                matriculados = 50;
+        double tarifa = 10d;
+        Grupo grupo1 = new Grupo(codigo,actividad,nplazas,matriculados,tarifa),
+            grupo2 = new Grupo(codigo,actividad,nplazas,matriculados,tarifa);
+
+        // Act
+        boolean sonIguales = grupo1.equals(grupo2);
+
+        // Assert
+        assertTrue(sonIguales);
+    }
+     */
 
     @Test
     public void hashCode_noCambiaConPlazasMatriculaOTarifa() throws ClubException {
